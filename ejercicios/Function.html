@@ -10,7 +10,9 @@
     <p><em>Abre la consola</em></p>
 
     <ul>
-
+        <li><button class="call-to-action">Aprender</button></li>
+        <li><button class="call-to-action">Aprender Mas</button></li>
+        <li><button class="call-to-action">¡Nunca pares de aprender!</button> </li>
     </ul>
     <script>
         //Establece "this" usando "call"
@@ -25,9 +27,40 @@
 
         saludar.call(richard)
         //Establece "this" usando "call" y pasar argumentos a la funcion
+        function caminar(metros, direccion) {
+            console.log(`${this.name} camina ${metros} metros hacia ${direccion} `)
+        }
+
+        caminar.call(richard, 400, "norte")
+        
         //Establece "this" usando "apply" y pasar argumentos a la funcion
+        caminar.apply(richard, [800, "Sur"])
+
+        const valores = [800, 'noreste']
+        caminar.apply(richard, valores)
+        /*
+            Call - commas
+            Apply - arregl
+        */
         //Establecer "this" en una nueva funcion usando "bind"
+        const daniel = {
+            name : 'Daniel',
+            apellido : 'Sanchez'
+        }
+        
+        const danielSaluda = saludar.bind(daniel)
+        danielSaluda()
+
+        const danielCamina = caminar.bind(daniel, 1000)
+        danielCamina("sur")
         //Cuando es util usar uno de estos metodos
+        const buttons = document.getElementsByClassName("call-to-action")
+        /*buttons.forEach(button => {
+            button.onclick = () => alert("Nunca pares de aprender")
+        })*/
+        Array.prototype.forEach.call(buttons, button => {
+            button.onclick = () => alert("Nunca pares de aprender")
+        })
     </script>
 </body>
 </html>
